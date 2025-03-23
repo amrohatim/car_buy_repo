@@ -3,6 +3,7 @@
 import 'dart:math';
 
 import 'package:car_buy/constants.dart';
+import 'package:car_buy/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -269,65 +270,81 @@ class _InstallmentsPageState extends State<InstallmentsPage>
                   ),
                 ),
                 SizedBox(height: 10.h),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15).w,
-                  ),
-
-                  color: const Color.fromARGB(255, 253, 191, 76),
-                  elevation: 5,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 80.w,
-                      vertical: 20.h,
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Your Wallet",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.sp,
-                            color: Color(0xffffffff),
-                          ),
-                        ),
-                        SizedBox(height: 20.h),
-                        AnimatedBuilder(
-                          animation: animation,
-
-                          builder: (context, child) {
-                            return Transform(
-                              alignment: Alignment.center,
-                              transform:
-                                  Matrix4.identity()..setTranslationRaw(
-                                    animation.value * 14,
-                                    0,
-                                    0,
-                                  ),
-                              child: Image.asset(
-                                "assets/images/wallet.png",
-                                scale: 5,
-                              ),
+                InkWell(
+                  onTap:
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Wallet(
+                              instullmentPayment:
+                                  is24
+                                      ? price.toStringAsFixed(0)
+                                      : (price * 2).toStringAsFixed(0),
                             );
                           },
                         ),
-                        SizedBox(height: 10.h),
+                      ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15).w,
+                    ),
 
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Color(0xffffffff),
-                            borderRadius: BorderRadius.circular(10).w,
-                          ),
-                          child: Text(
-                            "Click to open",
+                    color: MyColors.primaryColor,
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 80.w,
+                        vertical: 20.h,
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Your Wallet",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.sp,
+                              color: Color(0xffffffff),
                             ),
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 20.h),
+                          AnimatedBuilder(
+                            animation: animation,
+
+                            builder: (context, child) {
+                              return Transform(
+                                alignment: Alignment.center,
+                                transform:
+                                    Matrix4.identity()..setTranslationRaw(
+                                      animation.value * 14,
+                                      0,
+                                      0,
+                                    ),
+                                child: Image.asset(
+                                  "assets/images/wallet.png",
+                                  scale: 5,
+                                ),
+                              );
+                            },
+                          ),
+                          SizedBox(height: 10.h),
+
+                          Container(
+                            padding: EdgeInsets.all(8).w,
+                            decoration: BoxDecoration(
+                              color: Color(0xffffffff),
+                              borderRadius: BorderRadius.circular(10).w,
+                            ),
+                            child: Text(
+                              "Click to Pay",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.sp,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -1,8 +1,13 @@
+import 'package:car_buy/app_constant.dart';
 import 'package:car_buy/home_page.dart';
+import 'package:car_buy/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() {
+  Stripe.publishableKey = publishableKey;
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
